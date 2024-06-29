@@ -1,1 +1,252 @@
-
+[
+    {
+        "id": "dc9cc196e1e43988",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bb650eb74b0f4075",
+        "type": "rpi-sensehatsim in",
+        "z": "dc9cc196e1e43988",
+        "name": "",
+        "motion": false,
+        "env": true,
+        "stick": false,
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "8ee849eb3e4ff1cd",
+                "120bdf0c430f6cf8"
+            ]
+        ]
+    },
+    {
+        "id": "bf8d6818e6c9d835",
+        "type": "rpi-sensehatsim out",
+        "z": "dc9cc196e1e43988",
+        "name": "",
+        "x": 680,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "7dc0cfea9a448adb",
+        "type": "inject",
+        "z": "dc9cc196e1e43988",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dda4a494eadfd1a3",
+        "type": "debug",
+        "z": "dc9cc196e1e43988",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "dac91996f05343d8",
+        "type": "statistics",
+        "z": "dc9cc196e1e43988",
+        "name": "",
+        "dataSetSize": "13",
+        "inputField": "payload",
+        "inputFieldType": "msg",
+        "resultField": "payload",
+        "resultFieldType": "msg",
+        "parameterField": "payload",
+        "parameterFieldType": "msg",
+        "stripFunction": false,
+        "resultOnly": true,
+        "x": 380,
+        "y": 320,
+        "wires": [
+            [
+                "dda4a494eadfd1a3",
+                "db6ee995965634d5"
+            ]
+        ]
+    },
+    {
+        "id": "37ad5fb1b51c3051",
+        "type": "function",
+        "z": "dc9cc196e1e43988",
+        "name": "function 2",
+        "func": "msg.topic=\"mean\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 180,
+        "wires": [
+            [
+                "dac91996f05343d8"
+            ]
+        ]
+    },
+    {
+        "id": "8ee849eb3e4ff1cd",
+        "type": "change",
+        "z": "dc9cc196e1e43988",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload.temperature",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 380,
+        "y": 100,
+        "wires": [
+            [
+                "903f129b21981fe0",
+                "e2144463550aa7b8"
+            ]
+        ]
+    },
+    {
+        "id": "903f129b21981fe0",
+        "type": "buffer-array",
+        "z": "dc9cc196e1e43988",
+        "name": "",
+        "bufferLen": "10",
+        "startWhenFilled": true,
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "37ad5fb1b51c3051"
+            ]
+        ]
+    },
+    {
+        "id": "120bdf0c430f6cf8",
+        "type": "debug",
+        "z": "dc9cc196e1e43988",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 240,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "e2144463550aa7b8",
+        "type": "debug",
+        "z": "dc9cc196e1e43988",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f638191481092f4b",
+        "type": "influxdb out",
+        "z": "dc9cc196e1e43988",
+        "influxdb": "569e4bcb31df8db2",
+        "name": "",
+        "measurement": "temperatures",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 700,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "db6ee995965634d5",
+        "type": "function",
+        "z": "dc9cc196e1e43988",
+        "name": "function 3",
+        "func": "msg.payload={\n    location:\"HOME\",\n    room:\"KITCHEN\",\n    instant:33,\n    average:msg.payload,\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 420,
+        "wires": [
+            [
+                "f638191481092f4b"
+            ]
+        ]
+    },
+    {
+        "id": "569e4bcb31df8db2",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "environment",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    }
+]
