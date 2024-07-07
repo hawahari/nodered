@@ -1,0 +1,214 @@
+[
+    {
+        "id": "44ee7a217d7f7eb5",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c79e79c21b8a5db6",
+        "type": "inject",
+        "z": "44ee7a217d7f7eb5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "v": "",
+                "vt": "date"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 160,
+        "wires": [
+            [
+                "f20eea0c2b423099",
+                "29f1d594b288a2e5",
+                "1fa37e8100177839"
+            ]
+        ]
+    },
+    {
+        "id": "f20eea0c2b423099",
+        "type": "debug",
+        "z": "44ee7a217d7f7eb5",
+        "name": "UNIX time",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "29f1d594b288a2e5",
+        "type": "moment",
+        "z": "44ee7a217d7f7eb5",
+        "name": "Date",
+        "topic": "localtime",
+        "input": "",
+        "inputType": "date",
+        "inTz": "ETC//GMT",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "ddd Do MMM YYYY",
+        "locale": "en-GB",
+        "output": "",
+        "outputType": "msg",
+        "outTz": "Asia/Kathmandu",
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "25be6b3071121f9f",
+                "376abc4a0f0d1ea8"
+            ]
+        ]
+    },
+    {
+        "id": "1fa37e8100177839",
+        "type": "moment",
+        "z": "44ee7a217d7f7eb5",
+        "name": "Time",
+        "topic": "localtime",
+        "input": "",
+        "inputType": "date",
+        "inTz": "Asia/Katmandu",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "HH:mm:ss",
+        "locale": "en-GB",
+        "output": "",
+        "outputType": "msg",
+        "outTz": "Asia/Katmandu",
+        "x": 250,
+        "y": 380,
+        "wires": [
+            [
+                "bbbfd7a8b367fe2d",
+                "2ee8da833cb0d54d"
+            ]
+        ]
+    },
+    {
+        "id": "25be6b3071121f9f",
+        "type": "debug",
+        "z": "44ee7a217d7f7eb5",
+        "name": "Time",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "bbbfd7a8b367fe2d",
+        "type": "debug",
+        "z": "44ee7a217d7f7eb5",
+        "name": "Date",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "376abc4a0f0d1ea8",
+        "type": "ui_text",
+        "z": "44ee7a217d7f7eb5",
+        "group": "3143670fc9eead93",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Date",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 530,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "2ee8da833cb0d54d",
+        "type": "ui_gauge",
+        "z": "44ee7a217d7f7eb5",
+        "name": "",
+        "group": "3143670fc9eead93",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "gauge",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "24",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 470,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "3143670fc9eead93",
+        "type": "ui_group",
+        "name": "clock",
+        "tab": "63591cd577807890",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "63591cd577807890",
+        "type": "ui_tab",
+        "name": "Digital Clock",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
